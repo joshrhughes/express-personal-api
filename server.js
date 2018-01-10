@@ -38,16 +38,20 @@ app.get('/', function homepage(req, res) {
 app.get('/api', function api_index(req, res) {
   // TODO: Document all your api endpoints below
   res.json({
-    woops_i_has_forgot_to_document_all_my_endpoints: true, // CHANGE ME ;)
-    message: "Welcome to my personal api! Here's what you need to know!",
-    documentation_url: "https://github.com/joshrhughes/express-personal-api", // CHANGE ME
+  
+    message: "Welcome to my personal api! Here's the lowdown!",
+    documentation_url: "https://github.com/joshrhughes/express-personal-api",
     base_url: "https://personal-api-hw.herokuapp.com/", 
     endpoints: [
       {method: "GET", path: "/api", description: "Describes all available endpoints"},
-      {method: "GET", path: "/api/profile", description: "Data about me"}, // CHANGE ME
-      {method: "POST", path: "/api/campsites", description: "E.g. Create a new campsite"} // CHANGE ME
+      {method: "GET", path: "/api/profile", description: "Data about me"}, 
+      {method: "GET", path: "/api/donut", description: "Denver Donut Shops"},
+      {method: "GET", path: "/api/donut/:id", description: "Info about a specific Donut Shop"},
+      {method: "POST", path: "/api/donut", description: "Add Denver Donut Shops"},
+      {method: "PUT", path: "/api/donut/:id", description: "Edit the info of a specific Donut Shop"},
+      {method: "DELETE", path: "/api/donut/:id", description: "Delete a specific Donut Shop"}
     ]
-  })
+  });
 });
 
 /**********
