@@ -40,12 +40,13 @@ db.Donut.remove({}, (err) => {
     if (err) console.log(err);
     console.log('Seed.js: cleared Donut collection');
     // seed db
-    db.Donut.create(donut, err => {
+    db.Donut.create(donutShops, err => {
         if (err) {
             return console.log(err);
         } else {
             console.log('Seed.js: created seed Donut data');
-            process.exit(); // we're all done! Exit the program.
+            console.log(donutShops);
+            process.exit(); 
         }
     });
 });

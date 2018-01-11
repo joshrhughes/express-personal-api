@@ -1,6 +1,7 @@
 // require express and other modules
 var express = require('express'),
     app = express();
+ var mongoose = require('mongoose');   
 
 // parse incoming urlencoded form data
 // and populate the req.body object
@@ -12,7 +13,15 @@ app.use(bodyParser.json());
  * DATABASE *
  ************/
 
-// var db = require('./models');
+var db = require('./models');
+
+const personalData = {
+  name: 'Josh Hughes',
+  github_link: 'https://github.com/joshrhughes',
+  github_profile_image: 'https://avatars0.githubusercontent.com/u/33578599?s=460&v=4',
+  current_city: 'Denver',
+  hobbies: ['Climbing', 'Reading', 'Coding', 'Hiking', 'Travel'],
+};
 
 /**********
  * ROUTES *
@@ -62,6 +71,3 @@ app.get('/api', function api_index(req, res) {
 app.listen(process.env.PORT || 3000, function () {
   console.log('Express server is up and running on http://localhost:3000/');
 });
-
-
-//Me adding stuff to test
