@@ -43,7 +43,10 @@ app.get('/', function homepage(req, res) {
 /*
  * JSON API Endpoints
  */
+// variables 
+let counter = 3;
 
+// Get api info
 app.get('/api', function api_index(req, res) {
   // TODO: Document all your api endpoints below
   res.json({
@@ -63,6 +66,55 @@ app.get('/api', function api_index(req, res) {
   });
 });
 
+//get data about me
+app.get('/api/profile', function api_profile(req, res){
+  res.json(personalData);
+});
+
+
+//get data about donut shops
+app.get('/api/donut', function api_donut(req, res) {
+  db.Donut.find({}, function (err, shops) {
+    if (err) {
+      return console.log("ERROR" + err);
+    } else {
+      res.json(shops);
+    }
+  });
+});
+
+//get data about specific donut shops
+app.get('/api/donut/:id', function api_donut_id(req, res) {
+
+});
+
+//create data about donut shops
+app.post('/api/donut', function create_donut(req, res) {
+  var donut = req.body;
+  //console.log(req.body);
+  var newShop = db.Donut({
+    Resturant: donut.Resturant,
+    Address: donut.Address,
+    Website: donut.Website
+  });
+  newShop.save(function(err,newShop){
+    if(err) {
+      return handleError(err);
+    }
+    //console.log("saved", newShop.Resturant);
+    res.json(newShop);
+  });
+});
+
+//get data about me
+app.put('/api/donut/:id', function edit_donut(req, res) {
+
+});
+
+//get data about me
+app.delete('/api/donut/:id', function delete_donut(req, res) {
+  res.json("test");
+});
 /**********
  * SERVER *
  **********/
