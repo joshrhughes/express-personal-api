@@ -1,3 +1,5 @@
+// import { read } from 'fs';
+
 // require express and other modules
 var express = require('express'),
     app = express();
@@ -85,7 +87,15 @@ app.get('/api/donut', function api_donut(req, res) {
 
 //get data about specific donut shops
 app.get('/api/donut/:id', function api_donut_id(req, res) {
-
+  var id = req.params.id;
+  db.Donut.findOne({ _id: id }, function (err, donutShop) {
+    if (err) {
+      console.log(err);
+    }
+    else {
+      res.json(donutShop);
+    }
+  });
 });
 
 //create data about donut shops
@@ -108,12 +118,32 @@ app.post('/api/donut', function create_donut(req, res) {
 
 //get data about me
 app.put('/api/donut/:id', function edit_donut(req, res) {
-
+  var id = req.params.id;
+  db.Donut.findOne({_id:id},function(err, donutShop){
+    if(err){
+      console.log(err);
+    }
+    else{
+      donutShop.Resturant = req.body.Resturant;
+      donutShop.Address = req.body.Address;
+      donutShop.Website = req.body.Website;
+      donutShop.save();
+      res.json(donutShop);
+    }
+  });
 });
 
 //get data about me
 app.delete('/api/donut/:id', function delete_donut(req, res) {
-  res.json("test");
+  var id = req.params.id;
+  db.Donut.findOneAndRemove({ _id: id }, function (err, donutShop) {
+    if (err) {
+      console.log(err);
+    }
+    else {
+      res.json("Deleted");
+    }
+  });
 });
 /**********
  * SERVER *
